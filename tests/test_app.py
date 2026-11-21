@@ -42,3 +42,19 @@ def test_empty_title_returns_400(client):
     )
 
     assert response.status_code == 400
+
+def test_tickets_are_sorted_by_priority(client):
+    response = client.get("/api/tickets")
+
+    assert response.status_code == 200
+
+    tickets = response.get_json()
+    priorities = [ticket["priority"] for ticket in tickets]
+
+    assert priorities == [
+        "High",
+        "High",
+        "Medium",
+        "Medium",
+        "Low"
+    ]

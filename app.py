@@ -46,9 +46,13 @@ def find_ticket(ticket_id):
 
 
 def sort_by_priority(tickets):
-    """Return tickets with the most urgent first: High, then Medium, then Low."""
-    return sorted(tickets, key=lambda t: t["priority"])
-
+    """Return tickets with the most urgent first."""
+    priority_order = {
+        "High": 1,
+        "Medium": 2,
+        "Low": 3
+    }
+    return sorted(tickets, key=lambda t: priority_order[t["priority"]])
 
 # ---------- API ----------
 
