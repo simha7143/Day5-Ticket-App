@@ -58,3 +58,11 @@ def test_tickets_are_sorted_by_priority(client):
         "Medium",
         "Low"
     ]
+def test_resolved_ticket_displays_real_status(client):
+    response = client.get("/")
+    assert response.status_code == 200
+
+    page = response.get_data(as_text=True)
+
+    assert "Excel keeps crashing on startup" in page
+    assert "Resolved" in page
